@@ -1,6 +1,6 @@
 IMAGE_REGISTRY = harbor.beautytiger.home
-IMAGE_REPO = docker.io/python
-IMAGE_TAG = 3.8-pip
+IMAGE_REPO = docker.io/ubuntu
+IMAGE_TAG = debug
 
 .PHONY: image release
 

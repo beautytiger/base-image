@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug
+  namespace: debug
+  labels:
+    app: debug
+spec:
+  selector:
+    matchLabels:
+      app: debug
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: debug
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: debug
+      containers:
+      - name: debug
+        image: harbor.beautytiger.home/docker.io/ubuntu:debug
+        imagePullPolicy: Always
+        command:
+        - /usr/bin/tail
+        args:
+        - -f
+        - /dev/null
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 10Mi

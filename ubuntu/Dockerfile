@@ -1,9 +1,9 @@
-FROM harbor.beautytiger.home/docker.io/python:3.8.12
+FROM harbor.beautytiger.home/docker.io/ubuntu:20.04
 
 LABEL org.opencontainers.image.authors="beautytiger"
 
 ENV TZ Asia/Shanghai
-ADD pip.conf /etc/pip.conf
+ADD sources.list /etc/apt/sources.list
 RUN adduser --disabled-password --gecos "" appuser --uid 9999 && \
     mkdir /app && \
     chown -R appuser.appuser /app
